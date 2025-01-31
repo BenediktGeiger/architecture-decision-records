@@ -1,6 +1,6 @@
-# 3. Implement Command line tools
+# 3. Standardize Docker Image Tagging Strategy
 
-Date: 2025-01-24
+Date: 2024-03-20
 
 ## Status
 
@@ -8,51 +8,51 @@ Accepted
 
 ## Context
 
-Our team needs to develop a set of command-line tools for managing Architecture Decision Records (ADRs). The key considerations are:
-
-1. Cross-platform compatibility
-2. Ease of installation and maintenance
-3. Ability to integrate with existing development workflows
-4. Low learning curve for developers
-
-Unix shell scripts present a viable implementation option since most development environments, including Windows (via WSL/Git Bash), macOS, and Linux distributions, support them natively.
-
-Current alternatives considered:
-- Python scripts (requires Python installation)
-- Node.js tools (requires Node.js runtime)
-- Go binaries (requires compilation for different platforms)
-
+Our teams are using inconsistent Docker image tagging practices, resulting in:
+- Uncertainty about image contents and versions
+- Difficulty tracking deployments
+- Challenges with rollbacks
+- Inefficient image cleanup processes
+- Risk of deploying wrong versions
 
 ## Decision
 
-We will implement our ADR management tools as Unix shell scripts, specifically targeting POSIX-compliant shells (sh). The scripts will:
+We will implement a standardized Docker image tagging strategy across all projects:
 
-1. Use basic Unix commands and shell features available across platforms
-2. Avoid dependencies on specific shells like Bash or Zsh
-3. Follow shell scripting best practices for maintainability
-4. Include clear documentation and usage examples
-5. Be distributed as simple text files that can be copied into any project
+Format: `<service-name>:<version>-<environment>-<build-hash>`
 
-This approach leverages the ubiquity of shell environments while keeping the implementation simple and portable.
+Components:
+- `service-name`: Application/service identifier
+- `version`: Semantic version (x.y.z)
+- `environment`: Target environment (dev/stage/prod)
+- `build-hash`: First 7 characters of git commit hash
+
+Examples:
+- `user-service:1.2.3-prod-a1b2c3d`
+- `payment-api:2.0.0-stage-7890xyz`
+- `auth-service:0.9.1-dev-q1w2e3r`
+
+Additional Tags:
+- Latest successful production build tagged as `<service-name>:latest`
+- Release candidates tagged as `<service-name>:rc-<version>`
+- Development builds tagged as `<service-name>:develop`
 
 ## Consequences
 
-### Positive Consequences:
+### Positive
+- Clear image versioning and traceability
+- Simplified deployment and rollback processes
+- Easier automation of CI/CD pipelines
+- Improved artifact management
+- Better disaster recovery capability
 
-1. **Easy Installation**: Scripts can be deployed by simple file copying, without package managers or build tools
-2. **Universal Compatibility**: Works across Unix-like systems and Windows (via WSL/Git Bash)
-3. **No External Dependencies**: Relies only on standard Unix tools available in most environments
-4. **Immediate Usage**: Developers can start using tools without additional setup
-5. **Version Control Friendly**: Shell scripts are text files that work well with Git
+### Negative
+- More complex tagging process
+- Additional storage requirements
+- Need to update existing build pipelines
 
-### Challenges and Risks:
-
-1. **Limited Features**: Complex operations may be harder to implement compared to full programming languages
-2. **Testing Complexity**: Shell scripts can be harder to test thoroughly
-3. **Maintenance Overhead**: As scripts grow, maintaining POSIX compliance across different shells requires careful attention
-4. **Performance**: For large operations, shell scripts may be slower than compiled alternatives
-
-### Visual Architecture Overview:
-![Shell Script ADR Tools Architecture](https://example.com/)
-
-The diagram shows the simple yet effective architecture of our shell-based ADR tools, highlighting the direct interaction between developers and ADR management through standard Unix commands.
+### Mitigation
+- Automate tagging in CI/CD pipelines
+- Implement regular cleanup of old images
+- Create shared build scripts
+- Document tagging strategy in developer onboarding
