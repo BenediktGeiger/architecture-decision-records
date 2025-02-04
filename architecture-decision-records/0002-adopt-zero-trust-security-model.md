@@ -7,7 +7,7 @@ Date: 2025-01-24
 Accepted
 
 ## Labels
-general
+general,main
 
 ## Context
 
