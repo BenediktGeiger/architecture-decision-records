@@ -6,6 +6,9 @@ Date: 2024-03-20
 
 Accepted
 
+## Labels
+general,main
+
 ## Context
 
 Our teams are using inconsistent Docker image tagging practices, resulting in:

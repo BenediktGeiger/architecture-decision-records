@@ -6,6 +6,9 @@ Date: 2024-03-19
 
 Accepted
 
+## Labels
+general
+
 ## Context
 
 Different teams and services across our organization handle errors inconsistently, leading to:

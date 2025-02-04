@@ -6,6 +6,9 @@ Date: 2024-03-21
 
 Accepted
 
+## Labels
+items
+
 ## Context
 
 As we develop the items service, we need consistent naming conventions for item entities to:

@@ -6,6 +6,9 @@ Date: 2025-01-24
 
 Accepted
 
+## Labels
+general
+
 ## Context
 
 - Our organization is rapidly scaling with remote workers and cloud services

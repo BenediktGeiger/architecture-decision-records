@@ -6,6 +6,9 @@ Date: 2024-03-20
 
 Accepted (with groans)
 
+## Labels
+general,main
+
 ## Context
 
 Our codebase has become too serious and developers are experiencing:

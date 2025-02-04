@@ -6,6 +6,9 @@ Date: 2024-03-21
 
 Accepted
 
+## Labels
+sales
+
 ## Context
 
 As we develop the sales service, we need consistent naming conventions for sales entities to:

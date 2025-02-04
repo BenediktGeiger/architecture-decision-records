@@ -6,6 +6,9 @@ Date: 2024-03-21
 
 Accepted
 
+## Labels
+items
+
 ## Context
 
 The Items Service needs rate limiting to:
